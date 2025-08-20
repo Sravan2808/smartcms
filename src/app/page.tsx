@@ -20,7 +20,7 @@ export default function Home() {
           </div>
           <div className="flex gap-3">
             <Link
-              href="/blogs"
+              href="/sign-in"
               className="first bg-gray-200 hover:bg-gray-300 transition-all duration-200 delay-100 text-black px-4 py-1 rounded"
             >
               Try it out!

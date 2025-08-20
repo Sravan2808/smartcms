@@ -5,6 +5,8 @@ import {Poppins} from "next/font/google"
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/app-sidebar";
 import NavBar from "@/components/navbar";
+import AuthProvider from "@/components/providers/AuthProvider";
+import { Toaster } from "@/components/ui/toaster";
 
 const poppins = Poppins({
   subsets:['latin'],
@@ -26,14 +28,17 @@ export default function RootLayout({
       <body
         className={`${poppins.className} antialiased`}
       >
+        <AuthProvider>
         <SidebarProvider>
           <AppSidebar />
           <main className="w-full">
             <SidebarTrigger />
             <NavBar />
             {children}
+            <Toaster />
           </main>
         </SidebarProvider>
+        </AuthProvider>
       </body>
     </html>
   );
