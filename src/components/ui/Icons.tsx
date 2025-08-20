@@ -1,5 +1,5 @@
 export const Icons = {
-  BlogCustomIcon: (props) => {
+  BlogCustomIcon: (props: React.SVGProps<SVGSVGElement>) => {
     return (
       <svg
         width={20}

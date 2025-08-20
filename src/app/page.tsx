@@ -2,8 +2,7 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Layers, Pencil, Zap } from "lucide-react";
-import { Icons } from "@/components/ui/icons";
-import { ThemeProvider } from "@/components/ui/theme-provider";
+import { Icons } from "@/components/ui/Icons";
 import Link from "next/link";
 
 export default function Home() {
@@ -20,7 +19,10 @@ export default function Home() {
             </p>
           </div>
           <div className="flex gap-3">
-            <Link href="/blogs" variant={"default"} className="first bg-gray-200 hover:bg-gray-300 transition-all duration-200 delay-100 text-black px-4 py-1 rounded">
+            <Link
+              href="/blogs"
+              className="first bg-gray-200 hover:bg-gray-300 transition-all duration-200 delay-100 text-black px-4 py-1 rounded"
+            >
               Try it out!
             </Link>
             <Button variant={"outline"} className="second">
