@@ -2,7 +2,7 @@ import dateFormat from "@/utils/dateFormat";
 import { Calendar } from "lucide-react";
 import Image from "next/image";
 
-export default function SingeBlog() {
+export default function SingleBlog() {
   const tempTags = "SpaceX,Nasa,Exploration";
   const tempHtml = `<p>Demo Content</p>`
   return (
@@ -30,8 +30,8 @@ export default function SingeBlog() {
           </div>
           <div className="text-xs flex items-center gap-2">
             <p>Tags:</p>
-            {tempTags.split(",").map((tag) => (
-              <p className="badge  bg-gray-600/30 border border-gray-700 w-fit px-[4px] py-[2px] rounded">
+            {tempTags.split(",").map((tag,index) => (
+              <p key={index} className="badge  bg-gray-600/30 border border-gray-700 w-fit px-[4px] py-[2px] rounded">
                 {tag}
               </p>
             ))}
