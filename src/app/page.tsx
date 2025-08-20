@@ -2,7 +2,7 @@
 import Image from "next/image";
 import { Button } from "@/components/ui/button";
 import { Layers, Pencil, Zap } from "lucide-react";
-import { Icons } from "@/components/ui/Icons";
+import { Icons } from "@/components/Icons";
 import Link from "next/link";
 
 export default function Home() {
