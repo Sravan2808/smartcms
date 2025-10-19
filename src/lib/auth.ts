@@ -1,6 +1,7 @@
 import GoogleProvider from "next-auth/providers/google";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { prisma } from "@lib/prisma";
+import { prisma } from "@/lib/prisma"
+import { getServerSession } from "next-auth";
 
 
 export const authOptions = {
@@ -13,14 +14,14 @@ export const authOptions = {
   },
   providers: [
     GoogleProvider({
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
+      clientId: process.env.GOOGLE_CLIENT_ID || "",
+      clientSecret: process.env.GOOGLE_CLIENT_SECRET || "",
     }),
   ],
   callbacks: {
-    async jwt({ token, user }) {
+    async jwt({ token, user }: { token: any; user?: any }) {
         if(user){
-            const dbUser = prisma.user.findUnique({
+            const dbUser = await (prisma as any).user.findUnique({
                 where:{email:user.email},
                 select:{id:true,name:true,email:true,username:true,image:true,role:true}
             })
@@ -33,7 +34,7 @@ export const authOptions = {
                 token.role = dbUser.role;
             }
             else{
-              const newUser = await prisma.user.create({
+              const newUser = await (prisma as any).user.create({
                 data:{
                   email:user.email,
                   name:user.name,
@@ -41,13 +42,13 @@ export const authOptions = {
                   role:"user"
                 }
               });
-              token.id = newUser.id
+              token.id = newUser.id;
             }
         }
-        return token.id
+        return token;
         
     },
-    async session({ session, token }) {
+    async session({ session, token }:{session:any;token:any}) {
         if(token){
           session.user.id = token.id;
           session.user.name = token.name;
@@ -63,3 +64,6 @@ export const authOptions = {
     }
   },
 };
+
+
+export const getAuthSession = () => getServerSession(authOptions);

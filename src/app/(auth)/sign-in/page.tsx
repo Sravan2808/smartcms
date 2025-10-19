@@ -3,7 +3,7 @@ import { Icons } from "@/components/Icons";
 import { useToast } from "@/hooks/use-toast";
 import { Anvil } from "lucide-react";
 import { signIn } from "next-auth/react";
-import React from "react";
+import React, { useState } from "react";
 
 export default function Signin() {
   const {toast} = useToast();
@@ -13,7 +13,8 @@ export default function Signin() {
       setLoading(true)
       await signIn("google")
     } catch (error) {
-      console.error(error.message);
+      const err = error as Error
+      console.error(err.message);
       toast({
         variant:"destructive",
         title:"Uh oh!",
@@ -36,7 +37,7 @@ export default function Signin() {
         >
           <Icons.GoogleLogo className="size-7" />
           {loading?'Loading...':'Sign In'}
-        </button>
+        </button> 
       </div>
     </section>
   );
